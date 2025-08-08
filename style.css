@@ -82,13 +82,74 @@ body {
 /* --- Specific Section Styling --- */
 .associate-logo {
     max-width: 150px;
-    filter: grayscale(100%);
+    /* filter: grayscale(100%); */
     opacity: 0.6;
     transition: all 0.3s ease;
 }
 .associate-logo:hover {
-    filter: grayscale(0%);
+    /* filter: grayscale(0%); */
     opacity: 1;
+}
+
+/* Associates Continuous Scroll Animation */
+.associates-scroll-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.associates-scroll {
+    display: flex;
+    animation: scroll-left 30s linear infinite;
+    width: max-content;
+}
+
+.associate-item {
+    flex-shrink: 0;
+    margin: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pause animation on hover */
+.associates-scroll-container:hover .associates-scroll {
+    animation-play-state: paused;
+}
+
+/* Associates Carousel Styling */
+#associates-carousel .carousel-indicators {
+    bottom: -50px;
+}
+
+#associates-carousel .carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ccc;
+    border: none;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+}
+
+#associates-carousel .carousel-indicators button.active {
+    background-color: #f0c15a;
+    transform: scale(1.2);
+}
+
+#associates-carousel .carousel-indicators button:hover {
+    background-color: #f0c15a;
+    transform: scale(1.1);
 }
 
 .award-icon {
@@ -98,25 +159,52 @@ body {
 
 /* --- FAQ Accordion --- */
 .accordion-item {
-    background-color: #fff;
-    border: 1px solid #ddd;
+    background-color: transparent;
+    border: none;
     margin-bottom: 10px;
-    border-radius: 5px;
+    border-radius: 0;
 }
+
 .accordion-button {
-    font-weight: 500;
-    color: #333;
+    font-weight: 600;
+    color: #2c3e50;
+    padding: 1rem;
+    background-color: transparent;
+    border: none;
+    transition: all 0.3s ease;
 }
+
 .accordion-button:not(.collapsed) {
     color: #000;
-    background-color: #f0c15a;
+    background-color: transparent;
+    box-shadow: none;
 }
+
+.accordion-button:hover {
+    background-color: transparent;
+    color: #f0c15a;
+}
+
 .accordion-button:focus {
     box-shadow: none;
-    border-color: rgba(0,0,0,.125);
+    border-color: transparent;
 }
-.accordion-body{
-    background-color: #f8f9fa;
+
+.accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23f0c15a'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    transition: all 0.3s ease;
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+.accordion-body {
+    background-color: transparent;
+    padding: 1rem;
+    color: #495057;
+    line-height: 1.6;
+    font-size: 0.95rem;
 }
 
 
