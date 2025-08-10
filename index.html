@@ -59,9 +59,36 @@
     <section id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active" style="background-image: url('images/elan-Home-Gallery-Image-2--scaled.jpg');">
-                <div class="carousel-caption d-none d-md-block text-center">
-                    <h1>Heart and Soul of Community Shopping</h1>
-                    <p>Our team consists of top real estate specialists with years of experience in the real estate profession.</p>
+                <div class="carousel-caption d-none d-md-block">
+                  <div class="container">
+                    <div class="row justify-content-center align-items-center">
+                      <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-start">
+                        <h1>Heart and Soul of Community Shopping</h1>
+                        <p>Our team consists of top real estate specialists with years of experience in the real estate profession.</p>
+                      </div>
+                      <div class="col-lg-5 offset-lg-1">
+                        <div class="p-4 bg-white rounded shadow contact-form-wrapper">
+                          <form id="contactFormHero">
+                            <div class="mb-3">
+                              <label for="contactNameHero" class="form-label">Your Name</label>
+                              <input type="text" class="form-control" id="contactNameHero" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                              <label for="contactEmailHero" class="form-label">Your Email</label>
+                              <input type="email" class="form-control" id="contactEmailHero" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                              <label for="contactPhoneHero" class="form-label">Your Phone Number</label>
+                              <input type="tel" class="form-control" id="contactPhoneHero" name="phone" required>
+                            </div>
+                            <input type="hidden" name="formType" value="contact">
+                            <button type="submit" class="btn btn-warning custom-btn w-100 mt-2">Submit Now</button>
+                          </form>
+                          <div id="contactFormMessageHero" class="mt-3" style="display: none;"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
             </div>
             <div class="carousel-item" style="background-image: url('images/Elan-Gallery-Image-1-scaled.jpg');">
@@ -88,6 +115,42 @@
     </section>
 
     <section class="py-5">
+  <script>
+  document.getElementById('contactFormHero').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const messageDiv = document.getElementById('contactFormMessageHero');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    const formData = new FormData(form);
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwPc4_sJBIhQrkPrGaLvHJj4EaOqVlUMI7nLw50-HTQHKiEF6PSfYT1dGma_M4_LSDX5A/exec';
+    fetch(scriptURL, {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        window.location.href = 'thank-you.html';
+      } else {
+        throw new Error(data.message || 'An unknown error occurred.');
+      }
+    })
+    .catch(error => {
+      messageDiv.innerHTML = '<div class="alert alert-danger">Sorry, there was an error sending your message. Please try again.</div>';
+      console.error('Error:', error);
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Now';
+      messageDiv.style.display = 'block';
+      setTimeout(() => {
+        messageDiv.style.display = 'none';
+      }, 5000);
+    });
+  });
+  </script>
         <div class="container">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6">
@@ -96,7 +159,7 @@
                     <a href="#" class="btn btn-warning custom-btn">Know More</a>
                 </div>
                 <div class="col-lg-6">
-                    <img src="images/pexels-griffinw-6643262.jpg" class="img-fluid rounded shadow" alt="Modern building architecture">
+                    <img src="images/index1.jpg" class="img-fluid rounded shadow" alt="Modern building architecture">
                 </div>
             </div>
         </div>
@@ -106,7 +169,7 @@
         <div class="container">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6">
-                    <img src="images/pexels-suissounet-28984308.jpg" class="img-fluid rounded shadow" alt="Recent Milestone Project">
+                    <img src="images/index2.jpg" class="img-fluid rounded shadow" alt="Recent Milestone Project">
                 </div>
                  <div class="col-lg-6">
                     <h2 class="section-title">Recent Milestone</h2>
@@ -230,6 +293,16 @@
   </div>
 
             <hr class="my-5">
+
+            <!-- Map Section Start -->
+            <div class="row justify-content-center mb-5">
+              <div class="col-12 col-md-10 col-lg-8">
+                <div class="rounded shadow overflow-hidden">
+                  <img src="images/map.jpg" alt="Elan Location Map" class="img-fluid w-100" style="object-fit:cover; min-height:200px; max-height:400px;">
+                </div>
+              </div>
+            </div>
+            <!-- Map Section End -->
 
             <div class="row justify-content-center">
                 <div class="col-lg-8">
